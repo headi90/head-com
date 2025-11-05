@@ -1,5 +1,6 @@
 add_executable(chat_server
     main.cpp
+    ChatServer.cpp
 )
 
 target_include_directories(chat_server PRIVATE

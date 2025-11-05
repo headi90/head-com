@@ -1,5 +1,6 @@
 add_executable(chat_client
     main.cpp
+    ChatClient.cpp
 )
 
 target_include_directories(chat_client PRIVATE
