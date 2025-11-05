@@ -21,7 +21,7 @@ namespace server
         serverAddr.sin_port = htons(8080);
         serverAddr.sin_addr.s_addr = INADDR_ANY;
 
-        bind(serverSocket, (sockaddr *)&serverAddr, sizeof(serverAddr));
+        bind(serverSocket, reinterpret_cast<sockaddr *>(&serverAddr), sizeof(serverAddr));
         listen(serverSocket, 10);
 
         std::cout << "Server running on port 8080...\n";
@@ -30,7 +30,7 @@ namespace server
         {
             sockaddr_in clientAddr{};
             socklen_t clientSize = sizeof(clientAddr);
-            int clientSocket = accept(serverSocket, (sockaddr *)&clientAddr, &clientSize);
+            int clientSocket = accept(serverSocket, reinterpret_cast<sockaddr *>(&clientAddr), &clientSize);
 
             std::cout << "Client connected\n";
             {

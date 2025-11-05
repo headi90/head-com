@@ -6,7 +6,7 @@
 
 namespace client
 {
-    ChatClient::ChatClient(const std::string serverIp, int port)
+    ChatClient::ChatClient(const std::string serverIp, uint16_t port)
         : serverIp(serverIp), port(port), sock(-1) {}
 
     void ChatClient::receiveMessages()
@@ -35,7 +35,7 @@ namespace client
         serverAddr.sin_port = htons(port);
         inet_pton(AF_INET, serverIp.c_str(), &serverAddr.sin_addr);
 
-        connect(sock, (sockaddr *)&serverAddr, sizeof(serverAddr));
+        connect(sock, reinterpret_cast<sockaddr *>(&serverAddr), sizeof(serverAddr));
 
         std::thread(&ChatClient::receiveMessages, this).detach();
 
